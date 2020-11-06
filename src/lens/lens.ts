@@ -1,18 +1,18 @@
 import { Getter } from './Getter';
 import { Setter } from './Setter';
 
-export interface Lens<T, K> {
-    get: Getter<T, K>;
-    set: Setter<T, K>;
-}
+export type Lens<T> = {
+    get: Getter<T>;
+    set: Setter<T>;
+};
 
-export function lens<T, K>(getter: Getter<T, K>, setter: Setter<T, K>): Lens<T, K> {
+export function lens<T>(getter: Getter<T>, setter: Setter<T>): Lens<T> {
     return {
-        get(obj: T): K {
+        get(obj: T): T[keyof T] {
             return getter(obj);
         },
 
-        set(value: K, obj: T): T {
+        set(value: T[keyof T], obj: T): T {
             return setter(value, obj);
         },
     };

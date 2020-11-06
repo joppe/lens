@@ -1,5 +1,5 @@
 import { Lens } from './lens';
 
-export function view<T, K>(lens: Lens<T, K>, obj: T): K {
+export function view<T>(lens: Lens<T>, obj: T): T[keyof T] {
     return lens.get(obj);
 }
